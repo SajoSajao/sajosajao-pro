@@ -1,0 +1,97 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* Google Fonts */
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap');
+
+/* Base Styles */
+@layer base {
+  * {
+    @apply box-border;
+  }
+
+  body {
+    @apply font-sans bg-cream text-gray-900 antialiased;
+    margin: 0;
+    min-height: 100vh;
+  }
+
+  h1, h2, h3, h4, h5, h6 {
+    @apply font-sans;
+  }
+}
+
+/* Custom Utility Classes */
+@layer utilities {
+  .gradient-text {
+    @apply bg-gradient-to-r from-rose to-dusty-rose bg-clip-text text-transparent;
+  }
+
+  .glass-effect {
+    backdrop-filter: blur(10px);
+    background: rgba(255, 255, 255, 0.1);
+  }
+
+  .hero-video {
+    filter: brightness(0.7);
+  }
+
+  .custom-scrollbar::-webkit-scrollbar {
+    @apply w-1.5;
+  }
+
+  .custom-scrollbar::-webkit-scrollbar-track {
+    @apply bg-gray-100 rounded-lg;
+  }
+
+  .custom-scrollbar::-webkit-scrollbar-thumb {
+    @apply bg-rose rounded-lg;
+  }
+
+  .custom-scrollbar::-webkit-scrollbar-thumb:hover {
+    @apply bg-dusty-rose;
+  }
+}
+
+/* Custom Component Styles */
+@layer components {
+  .course-card {
+    @apply cursor-pointer transition-all duration-300;
+  }
+
+  .course-card:hover {
+    @apply -translate-y-1 shadow-xl;
+  }
+
+  .contact-card {
+    @apply transition-all duration-300;
+  }
+
+  .contact-card:hover {
+    @apply -translate-y-1 shadow-xl;
+  }
+
+  .form-input {
+    @apply transition-all duration-300;
+  }
+
+  .form-input:focus {
+    @apply -translate-y-0.5 shadow-lg;
+  }
+}
+
+/* Smooth Scrolling */
+html {
+  scroll-behavior: smooth;
+}
+
+/* Selection Color */
+::selection {
+  @apply bg-rose text-white;
+}
+
+::-moz-selection {
+  @apply bg-rose text-white;
+}
+
