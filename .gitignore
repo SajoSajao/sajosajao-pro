@@ -16,6 +16,10 @@ yarn-error.log*
 pnpm-debug.log*
 lerna-debug.log*
 
+# PM2 logs
+logs/
+*.log
+
 # Runtime data
 pids/
 *.pid
@@ -26,6 +30,11 @@ pids/
 .env
 .env.*.local
 .env.local
+.env.production
+.env.staging
+
+# PM2 ecosystem files (keep template, ignore instance-specific)
+ecosystem.config.local.js
 
 # Cache
 .cache/

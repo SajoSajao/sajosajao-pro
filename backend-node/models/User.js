@@ -58,8 +58,7 @@ userSchema.methods.comparePassword = async function(enteredPassword) {
   return await bcrypt.compare(enteredPassword, this.password);
 };
 
-// Index for faster queries
-userSchema.index({ userid: 1 });
+// Index for faster queries (removed duplicate)
 userSchema.index({ status: 1 });
 
 const User = mongoose.model('User', userSchema, 'users');
