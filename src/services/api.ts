@@ -1,4 +1,4 @@
-import { API_CONFIG, API_ENDPOINTS } from '../constants/config';
+import { API_CONFIG, API_ENDPOINTS, STORAGE_KEYS } from '../constants/config';
 
 class ApiService {
   private baseUrl: string;
@@ -7,13 +7,21 @@ class ApiService {
     this.baseUrl = API_CONFIG.BASE_URL;
   }
 
+  private getAuthToken(): string | null {
+    return localStorage.getItem(STORAGE_KEYS.AUTH_TOKEN);
+  }
+
   async request(endpoint: string, options: RequestInit = {}) {
     const url = `${this.baseUrl}${endpoint}`;
+    
+    // Get auth token for protected routes
+    const token = this.getAuthToken();
     
     const config: RequestInit = {
       ...options,
       headers: {
         'Content-Type': 'application/json',
+        ...(token && { Authorization: `Bearer ${token}` }),
         ...options.headers,
       },
     };
@@ -135,6 +143,43 @@ class ApiService {
         Authorization: `Bearer ${token}`,
       },
       body: JSON.stringify({ status }),
+    });
+  }
+
+  // User Management API
+  async getUsers() {
+    return this.request(API_ENDPOINTS.USERS.BASE, {
+      method: 'GET',
+    });
+  }
+
+  async createUser(userData: {
+    userid: string;
+    password: string;
+    role?: string;
+    status?: string;
+  }) {
+    return this.request('/auth/register', {
+      method: 'POST',
+      body: JSON.stringify(userData),
+    });
+  }
+
+  async updateUser(id: string, userData: {
+    userid?: string;
+    password?: string;
+    role?: string;
+    status?: string;
+  }) {
+    return this.request(API_ENDPOINTS.USERS.UPDATE(id), {
+      method: 'PUT',
+      body: JSON.stringify(userData),
+    });
+  }
+
+  async deleteUser(id: string) {
+    return this.request(API_ENDPOINTS.USERS.DELETE(id), {
+      method: 'DELETE',
     });
   }
 }

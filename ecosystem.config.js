@@ -95,25 +95,27 @@ module.exports = {
   deploy: {
     production: {
       user: 'deploy',
-      host: ['your-server-ip'],
+      host: ['sajosajao.com'],
       ref: 'origin/main',
       repo: 'https://github.com/SajoSajao/sajosajao-pro.git',
-      path: '/var/www/beauty-academy',
-      'post-deploy': 'npm install && npm run build && pm2 reload ecosystem.config.js --env production && pm2 save',
-      'pre-setup': 'apt-get update && apt-get install -y git nodejs npm mongodb',
+      path: '/var/www/sajosajao-beauty-academy',
+      'post-deploy': 'cd backend-node && npm install && npm run migrate && cd .. && npm install && npm run build && pm2 reload ecosystem.config.js --env production && pm2 save',
+      'pre-setup': 'apt-get update && apt-get install -y git nodejs npm mongodb-server nginx',
       env: {
-        NODE_ENV: 'production'
+        NODE_ENV: 'production',
+        DOMAIN: 'sajosajao.com'
       }
     },
     staging: {
       user: 'deploy',
-      host: ['staging-server-ip'],
+      host: ['staging.sajosajao.com'],
       ref: 'origin/staging',
       repo: 'https://github.com/SajoSajao/sajosajao-pro.git',
-      path: '/var/www/beauty-academy-staging',
-      'post-deploy': 'npm install && npm run build && pm2 reload ecosystem.config.js --env staging && pm2 save',
+      path: '/var/www/sajosajao-beauty-academy-staging',
+      'post-deploy': 'cd backend-node && npm install && npm run migrate && cd .. && npm install && npm run build && pm2 reload ecosystem.config.js --env staging && pm2 save',
       env: {
-        NODE_ENV: 'staging'
+        NODE_ENV: 'staging',
+        DOMAIN: 'staging.sajosajao.com'
       }
     }
   },

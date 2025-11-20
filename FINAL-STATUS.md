@@ -47,7 +47,18 @@ beauty-react/
 ### 🔐 Admin Access
 - **UserID:** `shreegajeshji` (lowercase)
 - **Password:** `#1ShreeGaneshJi`
-- Access via: `/admin/login`
+
+### 🌐 Access URLs
+
+**Development Mode:**
+- Frontend: http://localhost:5173
+- Admin Panel: http://localhost:5173/admin/login
+- API: http://localhost:5000
+
+**Production Mode:**  
+- Frontend: http://localhost:3000
+- Admin Panel: http://localhost:3000/admin/login
+- API: http://localhost:5000
 
 ### 📦 Quick Commands
 ```bash

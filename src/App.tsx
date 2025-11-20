@@ -13,6 +13,7 @@ import { AdminDashboard } from './pages/AdminDashboard';
 import { DashboardHome } from './pages/DashboardHome';
 import { CustomerEnquiries } from './pages/CustomerEnquiries';
 import { ContactMessages } from './pages/ContactMessages';
+import UserManagement from './pages/UserManagement';
 import { ROUTES } from './constants/routes';
 
 const App: React.FC = () => {
@@ -28,6 +29,7 @@ const App: React.FC = () => {
           <Route index element={<DashboardHome />} />
           <Route path="enquiries" element={<CustomerEnquiries />} />
           <Route path="messages" element={<ContactMessages />} />
+          <Route path="users" element={<UserManagement />} />
           {/* Add more admin routes here */}
         </Route>
         

@@ -104,6 +104,12 @@ pm2 deploy production update
 - **Admin Panel:** http://localhost:3000/admin/login
 - **API Health:** http://localhost:5000/api/health
 
+## Development URLs (Vite dev server)
+- **Frontend:** http://localhost:5173
+- **API:** http://localhost:5000  
+- **Admin Panel:** http://localhost:5173/admin/login
+- **API Health:** http://localhost:5000/api/health
+
 ## Security Notes
 1. **Change default JWT secret** in production
 2. **Use strong MongoDB credentials**

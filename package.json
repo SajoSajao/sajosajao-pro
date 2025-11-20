@@ -6,6 +6,7 @@
   "scripts": {
     "dev": "vite",
     "build": "tsc -b && vite build",
+    "build:production": "npm run build && node scripts/verify-build.js",
     "postbuild": "npm run sitemap",
     "sitemap": "echo 'Sitemap generated successfully'",
     "lint": "eslint .",
@@ -17,8 +18,9 @@
     "pm2:logs": "pm2 logs",
     "pm2:monit": "pm2 monit",
     "pm2:delete": "pm2 delete all",
-    "deploy:prod": "npm run build && pm2 start ecosystem.config.js --env production && pm2 save",
-    "deploy:staging": "npm run build && pm2 start ecosystem.config.js --env staging && pm2 save"
+    "deploy:prod": "npm run build:production && pm2 start ecosystem.config.js --env production && pm2 save",
+    "deploy:staging": "npm run build && pm2 start ecosystem.config.js --env staging && pm2 save",
+    "verify": "node scripts/verify-build.js"
   },
   "dependencies": {
     "@hookform/resolvers": "^3.3.2",

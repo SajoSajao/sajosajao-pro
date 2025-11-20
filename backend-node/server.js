@@ -33,13 +33,16 @@ app.use(express.json()); // Body parser
 app.use(express.urlencoded({ extended: true }));
 
 // CORS configuration
-const corsOptions = {
-  origin: [
+const corsOrigins = process.env.CORS_ORIGIN ? 
+  process.env.CORS_ORIGIN.split(',').map(origin => origin.trim()) : [
     'http://localhost:5173',
     'http://localhost:5174', 
     'http://localhost:5175',
     'http://localhost:3000'
-  ],
+  ];
+
+const corsOptions = {
+  origin: corsOrigins,
   credentials: true,
   optionsSuccessStatus: 200
 };
