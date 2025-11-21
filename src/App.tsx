@@ -15,35 +15,47 @@ import { CustomerEnquiries } from './pages/CustomerEnquiries';
 import { ContactMessages } from './pages/ContactMessages';
 import UserManagement from './pages/UserManagement';
 import { ROUTES } from './constants/routes';
+import { usePageTracking, useScrollTracking, useTimeTracking } from './hooks/useAnalytics';
+
+const AppContent: React.FC = () => {
+  // Enable analytics tracking
+  usePageTracking();
+  useScrollTracking();
+  useTimeTracking();
+
+  return (
+    <Routes>
+      {/* Admin Login - No Layout */}
+      <Route path={ROUTES.ADMIN.LOGIN} element={<AdminLogin />} />
+      
+      {/* Admin Dashboard */}
+      <Route path={ROUTES.ADMIN.DASHBOARD} element={<AdminDashboard />}>
+        <Route index element={<DashboardHome />} />
+        <Route path="enquiries" element={<CustomerEnquiries />} />
+        <Route path="messages" element={<ContactMessages />} />
+        <Route path="users" element={<UserManagement />} />
+        {/* Add more admin routes here */}
+      </Route>
+      
+      {/* Main Site with Layout */}
+      <Route path="/" element={<MainLayout />}>
+        <Route index element={<Home />} />
+        <Route path={ROUTES.COURSES} element={<Courses />} />
+        <Route path={ROUTES.COURSE_DETAILS} element={<CourseDetails />} />
+        <Route path={ROUTES.CONTACT} element={<Contact />} />
+        <Route path={ROUTES.TERMS} element={<TermsOfService />} />
+        <Route path={ROUTES.PRIVACY} element={<PrivacyPolicy />} />
+        <Route path="*" element={<Navigate to="/" replace />} />
+      </Route>
+    </Routes>
+  );
+};
 
 const App: React.FC = () => {
   return (
     <BrowserRouter>
       <ScrollToTop />
-      <Routes>
-        {/* Admin Login - No Layout */}
-        <Route path={ROUTES.ADMIN.LOGIN} element={<AdminLogin />} />
-        
-        {/* Admin Dashboard */}
-        <Route path={ROUTES.ADMIN.DASHBOARD} element={<AdminDashboard />}>
-          <Route index element={<DashboardHome />} />
-          <Route path="enquiries" element={<CustomerEnquiries />} />
-          <Route path="messages" element={<ContactMessages />} />
-          <Route path="users" element={<UserManagement />} />
-          {/* Add more admin routes here */}
-        </Route>
-        
-        {/* Main Site with Layout */}
-        <Route path="/" element={<MainLayout />}>
-          <Route index element={<Home />} />
-          <Route path={ROUTES.COURSES} element={<Courses />} />
-          <Route path={ROUTES.COURSE_DETAILS} element={<CourseDetails />} />
-          <Route path={ROUTES.CONTACT} element={<Contact />} />
-          <Route path={ROUTES.TERMS} element={<TermsOfService />} />
-          <Route path={ROUTES.PRIVACY} element={<PrivacyPolicy />} />
-          <Route path="*" element={<Navigate to="/" replace />} />
-        </Route>
-      </Routes>
+      <AppContent />
     </BrowserRouter>
   );
 };

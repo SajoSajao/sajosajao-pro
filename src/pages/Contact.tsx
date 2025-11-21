@@ -96,7 +96,9 @@ export const Contact: React.FC = () => {
     
     // Honeypot check for bots
     if (data.website) {
-      console.log('Bot detected');
+      if (import.meta.env.DEV) {
+        console.log('Bot detected');
+      }
       return;
     }
     
@@ -124,7 +126,9 @@ export const Contact: React.FC = () => {
       // Send data to backend API
       const response = await apiService.submitContactMessage(sanitizedData);
       
-      console.log('Contact Form Success:', response);
+      if (import.meta.env.DEV) {
+        console.log('Contact Form Success:', response);
+      }
 
       setSubmitSuccess(true);
       reset();

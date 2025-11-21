@@ -3,6 +3,7 @@ import { useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { enrollmentFormSchema, type EnrollmentFormData } from '../../utils/validation';
 import { sanitizeUserInput } from '../../utils/sanitize';
+import { trackEnrollment } from '../../utils/analytics';
 import { apiService } from '../../services/api';
 import { Modal } from '../ui/Modal';
 import { Input } from '../ui/Input';
@@ -86,7 +87,13 @@ export const EnrollmentModal: React.FC<EnrollmentModalProps> = ({
       // Send data to backend API
       const response = await apiService.submitEnrollment(sanitizedData);
       
-      console.log('Enrollment Success:', response);
+      // Track successful enrollment in Google Analytics
+      trackEnrollment(sanitizedData.course, 'enrollment');
+      
+      // Log success in development only
+      if (import.meta.env.DEV) {
+        console.log('Enrollment Success:', response);
+      }
 
       setSubmitSuccess(true);
       

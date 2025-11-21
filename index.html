@@ -30,6 +30,49 @@
     <!-- Font Awesome -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" />
     
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-8SBS1ZWNN2"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+
+      gtag('config', 'G-8SBS1ZWNN2', {
+        // Enhanced tracking features
+        enhanced_ecommerce: true,
+        send_page_view: true,
+        custom_parameters_allowed: true,
+        allow_google_signals: true,
+        allow_ad_personalization_signals: true,
+        cookie_expires: 63072000, // 2 years
+        
+        // Custom dimensions for better insights
+        custom_map: {
+          'user_type': 'dimension1',
+          'course_interest': 'dimension2',
+          'engagement_level': 'dimension3'
+        }
+      });
+      
+      // Set user properties for better segmentation
+      gtag('set', {
+        page_title: document.title,
+        language: 'en',
+        country: 'IN'
+      });
+      
+      // Track initial page load time
+      window.addEventListener('load', function() {
+        gtag('event', 'timing_complete', {
+          name: 'page_load',
+          value: Math.round(performance.now())
+        });
+      });
+    </script>
+    
+    <!-- Additional Meta Tags for Better SEO -->
+    <link rel="canonical" href="https://sajosajo.com" />
+    
     <title>Best Beautician Course in Kolkata – Professional Beauty Parlour Training with Certificate</title>
   </head>
   <body>

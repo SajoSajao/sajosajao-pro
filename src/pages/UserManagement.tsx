@@ -236,7 +236,9 @@ const UserManagement: React.FC = () => {
   useEffect(() => {
     const initializeUsers = () => {
       const token = getAuthToken();
-      console.log('Auth token found:', token ? 'Yes' : 'No');
+      if (import.meta.env.DEV) {
+        console.log('Auth token found:', token ? 'Yes' : 'No');
+      }
       if (!token) {
         setError('No authentication token found. Please login again.');
         setLoading(false);
